@@ -131,7 +131,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-    <script async defer src="https://buttons.github.io/buttons.js"></script> 
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
           <div className={`container ${darkMode ? 'dark-mode' : ''}`}>
         <div className="fixed top-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
           <h1 className="text-xl font-bold mt-1 flex justify-center items-center">
