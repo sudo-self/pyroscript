@@ -157,15 +157,6 @@ export default function App() {
               send
             </button>
           </form>
-          {user ? (
-            <div>
-              <button onClick={signOut} className="text-green-800">Sign Out</button>
-            </div>
-          ) : (
-            <div>
-              <button onClick={signInWithGoogle} className="text-green-800">Sign In with Google</button>
-            </div>
-          )}
         </div>
         <div className="max-w-md mx-auto px-8 py-12 mt-20 overflow-hidden">
           <div id="entriesContainer" style={{ paddingTop: '100px' }}>
