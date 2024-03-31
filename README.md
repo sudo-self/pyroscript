@@ -174,3 +174,19 @@ const analytics = getAnalytics(app);
   }
 }
 ```
+### firebase.json
+```
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+```
