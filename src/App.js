@@ -65,7 +65,7 @@ export default function App() {
           setInputValue('');
           confetti();
         } else {
-          alert('Thank you for using Pyroscript Messenger. You must be signed to post messages.');
+          alert('Thank you for using Pyroscript Messenger. Sign in is required to post messages.');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
