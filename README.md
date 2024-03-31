@@ -165,6 +165,12 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 ```
-
-
-
+### database.rules for auth
+```
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth != null"
+  }
+}
+```
