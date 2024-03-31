@@ -1,12 +1,12 @@
 ## A react messenger app with Firebase<br>
 React 0auth Firebase Tailwind Dicebear APi Vercel<br>
- <img id="modeIcon" src="https://bucket.jessejesse.com/fire.webp" alt="Cloudy Icon" class="w-6 h-6 mr-2"><br>
+<img id="modeIcon" src="https://bucket.jessejesse.com/fire.webp" alt="Cloudy Icon" class="w-6 h-6 mr-2"><br>
 ### vercel app: [chat](https://pyroscript.vercel.app/)
 ### cloudflare worker: [chat](https://chat.jessejesse.workers.dev)
 ### github pages: [chat](https://sudo-self.github.io/pyroscript/)
 ### Firebase app: [chat](https://fresh-squeezed-lemons.web.app)
 ### pages.dev: [chat](https://midnight-messenger.pages.dev/)<br>
-<img width="1440" alt="Screenshot 2024-03-30 at 2 51 04 AM" src="https://github.com/sudo-self/pyroscript/assets/119916323/2a309d18-6f13-4811-8139-f48eae5ccdc9"><hr>
+
 
 ### Random Seed
 
