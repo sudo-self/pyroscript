@@ -143,16 +143,16 @@ export default function App() {
             <Switch checked={darkMode} onChange={toggleSwitchFunction} />
           </div>
           <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="entry"
-              name="entry"
-              placeholder="say something nice.."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
-              style={{ width: '100%' }}
-            />
+          <input
+  type="text"
+  id="entry"
+  name="entry"
+  placeholder="say something nice.."
+  value={inputValue}
+  onChange={(e) => setInputValue(e.target.value)}
+  className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
+  style={{ width: '100%', color: 'black' }} // Set color to black
+/>
             <button type="submit" className="bg-gray-900 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pyro focus:outline-none focus:bg-gray-900 confetti-btn">
               send
             </button>
