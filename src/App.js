@@ -131,12 +131,14 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className={`container ${darkMode ? 'dark-mode' : ''}`}>
+    <script async defer src="https://buttons.github.io/buttons.js"></script> 
+          <div className={`container ${darkMode ? 'dark-mode' : ''}`}>
         <div className="fixed top-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
-          <h1 className="text-xl font-bold mt-1">
-            <span className="text-orange-600">{'{Pyro'}</span>
-            <span className="text-blue-900">{'ScRIPt}'}</span>
+          <h1 className="text-xl font-bold mt-1 flex justify-center items-center">
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
+          <a class="github-button" href="https://github.com/sudo-self/pyroscript" data-color-scheme="no-preference: dark_high_contrast; light: dark_high_contrast; dark: dark_high_contrast;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/pyroscript on GitHub">Star</a>
           </h1>
+      
           <div className="flex items-center justify-center">
             <Brightness7Icon /> {/* Always show the light mode icon */}
             <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
@@ -193,4 +195,5 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
 
