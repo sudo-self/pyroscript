@@ -105,6 +105,15 @@ export default function App() {
     }
   };
 
+  const signInWithGitHub = async () => {
+    try {
+      const provider = new firebase.auth.GithubAuthProvider();
+      await firebase.auth().signInWithPopup(provider);
+    } catch (error) {
+      console.error('Error signing in with GitHub:', error);
+    }
+  };
+
   const signOut = async () => {
     try {
       await firebase.auth().signOut();
@@ -129,69 +138,77 @@ export default function App() {
   });
 
   return (
-          <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <div className={`container ${darkMode ? 'dark-mode' : ''}`}>
-                  <div className="fixed top-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
-                    <h1 className="text-xl font-bold mt-1 flex justify-center items-center">
-                      <a className="github-button" href="https://github.com/sudo-self/pyroscript" data-color-scheme="no-preference: dark_high_contrast; light: dark_high_contrast; dark: dark_high_contrast;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/pyroscript on GitHub">PyroScript</a>
-                      <div className="flex items-center">
-                      </div>
-                    </h1>
-                    <div className="flex items-center justify-center">
-                      <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bmc-logo.svg" alt="Jesse's SVG" className="w-4 h-auto" />
-                      <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
-                      <Switch checked={darkMode} onChange={toggleSwitchFunction} />
-                    </div>
-                    <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
-                      <input
-                        type="text"
-                        id="entry"
-                        name="entry"
-                        placeholder="say something nice.."
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
-                        style={{ width: '100%', color: 'black' }}
-                      />
-                      <button type="submit" className="bg-gray-900 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pyro focus:outline-none focus:bg-gray-900 confetti-btn">
-                        send
-                      </button>
-                    </form>
-                    <div className="flex justify-center mt-2">
-                      {user ? (
-                        <button onClick={signOut} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pink-700 focus:outline-none focus:bg-pink-700">
-                          SignOut
-                        </button>
-                      ) : (
-                        <button onClick={signInWithGoogle} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
-                          Google
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="max-w-md mx-auto px-8 py-12 mt-20 overflow-hidden">
-                    <div id="entriesContainer" style={{ paddingTop: '100px' }}>
-                      {messages.map((message, index) => (
-                        <div key={index} className="w-full mb-2">
-                          <div className="flex items-center overflow-hidden">
-                            <img src={message.avatarUrl} className="w-8 h-8 mr-2 rounded-full" />
-                            <p className="entry-text">{message.message}</p>
-                          </div>
-                          <p className="text-sm text-gray-500">{message.timestamp}</p> {/* Date time text with custom styles */}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="fixed bottom-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
-                    <div className="text-sm text-gray-600">
-                      <a href="https://www.buymeacoffee.com/sudoself" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
-                        <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bmc-logo.svg" alt="Jesse's SVG" className="w-4 h-auto" />
-                        <span className="ml-1">buy me a coffee</span>
-                      </a>
-                    </div>
-                  </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={`container ${darkMode ? 'dark-mode' : ''}`}>
+        <div className="fixed top-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
+          <h1 className="text-xl font-bold mt-1 flex justify-center items-center">
+            <a className="github-button" href="https://github.com/sudo-self/pyroscript" data-color-scheme="no-preference: dark_high_contrast; light: dark_high_contrast; dark: dark_high_contrast;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/pyroscript on GitHub">PyroScript</a>
+            <div className="flex items-center">
+            </div>
+          </h1>
+          <div className="flex items-center justify-center">
+          <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/fire.webp" alt="Jesse's SVG" className="w-4 h-auto" />
+          <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
+            <Switch checked={darkMode} onChange={toggleSwitchFunction} />
+          </div>
+          <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="entry"
+              name="entry"
+              placeholder="say something nice.."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
+              style={{ width: '100%', color: 'black' }}
+            />
+            <button type="submit" className="bg-gray-900 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pyro focus:outline-none focus:bg-gray-900 confetti-btn">
+              send
+            </button>
+          </form>
+          <div className="flex justify-center mt-2">
+            {user ? (
+              <button onClick={signOut} className="bg-pink-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pink-700 focus:outline-none focus:bg-pink-700">
+                SignOut
+              </button>
+            ) : (
+              <>
+                <button onClick={signInWithGoogle} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
+                  Google
+                </button>
+           
+                 <div style={{ width: '10px' }}></div> {/* Add space */}
+                <button onClick={signInWithGitHub} className="bg-purple-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-purple-800 focus:outline-none focus:bg-purple-800">
+                  GitHub
+               </button>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="max-w-md mx-auto px-8 py-12 mt-20 overflow-hidden">
+          <div id="entriesContainer" style={{ paddingTop: '100px' }}>
+            {messages.map((message, index) => (
+              <div key={index} className="w-full mb-2">
+                <div className="flex items-center overflow-hidden">
+                  <img src={message.avatarUrl} className="w-8 h-8 mr-2 rounded-full" />
+                  <p className="entry-text">{message.message}</p>
                 </div>
-              </ThemeProvider>
-            );
-          }
+                <p className="text-sm text-gray-500">{message.timestamp}</p> {/* Date time text with custom styles */}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="fixed bottom-0 left-0 w-full z-50 bg-gray-300 shadow-md px-4 py-2 text-center">
+          <div className="text-sm text-gray-600">
+            <a href="https://www.buymeacoffee.com/sudoself" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center">
+              <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bmc-logo.svg" alt="Jesse's SVG" className="w-4 h-auto" />
+              <span className="ml-1">buy me a coffee</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+}
+
