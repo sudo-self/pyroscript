@@ -144,8 +144,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
-### Firebase
-<img width="738" alt="Screenshot 2024-03-30 at 9 38 20 PM" src="https://github.com/sudo-self/pyroscript/assets/119916323/236b9d29-7b83-4baf-a48b-63521a47f299"><br>
 
 ### message count
 
