@@ -2,10 +2,8 @@
 React 0auth Firebase Tailwind Dicebear APi Vercel<br>
 <img id="modeIcon" src="https://bucket.jessejesse.com/fire.webp" alt="Cloudy Icon" class="w-6 h-6 mr-2"><br>
 ### vercel app: [chat](https://pyroscript.vercel.app/)
-### cloudflare worker: [chat](https://chat.jessejesse.workers.dev)
-### github pages: [chat](https://sudo-self.github.io/pyroscript/)
 ### Firebase app: [chat](https://fresh-squeezed-lemons.web.app)
-### pages.dev: [chat](https://midnight-messenger.pages.dev/)<br>
+
 
 
 ### Random Seed
