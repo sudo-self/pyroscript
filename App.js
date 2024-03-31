@@ -138,8 +138,9 @@ export default function App() {
             <span className="text-blue-900">{'ScRIPt}'}</span>
           </h1>
           <div className="flex items-center justify-center">
-            <Brightness7Icon /> {/* Always show the light mode icon */}
-            <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
+                 <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bmc-logo.svg" alt="Jesse's SVG" className="w-4 h-auto" />
+              <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
+              <Switch checked={darkMode} onChange={toggleSwitchFunction} />
             <Switch checked={darkMode} onChange={toggleSwitchFunction} />
           </div>
           <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
