@@ -148,8 +148,8 @@ export default function App() {
             </div>
           </h1>
           <div className="flex items-center justify-center">
-            <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/bmc-logo.svg" alt="Jesse's SVG" className="w-4 h-auto" />
-            <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
+          <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/fire.webp" alt="Jesse's SVG" className="w-4 h-auto" />
+          <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
             <Switch checked={darkMode} onChange={toggleSwitchFunction} />
           </div>
           <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
@@ -177,10 +177,11 @@ export default function App() {
                 <button onClick={signInWithGoogle} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
                   Google
                 </button>
-                <div style={{ width: '10px' }}></div> {/* Add space */}
+           
+                 <div style={{ width: '10px' }}></div> {/* Add space */}
                 <button onClick={signInWithGitHub} className="bg-purple-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-purple-800 focus:outline-none focus:bg-purple-800">
                   GitHub
-                </button>
+               </button>
               </>
             )}
           </div>
@@ -210,3 +211,4 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
