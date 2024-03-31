@@ -142,30 +142,31 @@ export default function App() {
             <span className="items-center text-base font-bold text-gray-900" id="messageCount">{messages.length}</span>
             <Switch checked={darkMode} onChange={toggleSwitchFunction} />
           </div>
-          <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="entry"
-              name="entry"
-              placeholder="say something nice.."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
-              style={{ width: '100%', color: 'black' }}
-            />
-            <button type="submit" className="bg-gray-900 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pyro focus:outline-none focus:bg-gray-900 confetti-btn mr-2">
-              send
-            </button>
-            {user ? (
-              <button onClick={signOut} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700 m1-2">
-                SignOut
-              </button>
-            ) : (
-              <button onClick={signInWithGoogle} className="bg-green-800 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
-                SignIn
-              </button>
-            )}
-          </form>
+    <form id="guestbookForm" className="flex items-center mt-2 relative mx-auto max-w-md" onSubmit={handleSubmit}>
+  <input
+    type="text"
+    id="entry"
+    name="entry"
+    placeholder="say something nice.."
+    value={inputValue}
+    onChange={(e) => setInputValue(e.target.value)}
+    className="border-gray-300 rounded-md py-2 px-4 mr-2 focus:outline-none focus:border-green-900 flex-grow input-dark-mode"
+    style={{ width: '100%', color: 'black' }}
+  />
+  <button type="submit" className="bg-gray-900 text-white px-4 py-2 rounded-md transition duration-300 hover:bg-pyro focus:outline-none focus:bg-gray-900 confetti-btn mr-2">
+    send
+  </button>
+  {user ? (
+    <button onClick={signOut} className="bg-green-800 text-white px-4 py-2 rounded-md ml-2 transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
+      SignOut
+    </button>
+  ) : (
+    <button onClick={signInWithGoogle} className="bg-green-800 text-white px-4 py-2 rounded-md ml-2 transition duration-300 hover:bg-green-700 focus:outline-none focus:bg-green-700">
+      SignIn
+    </button>
+  )}
+</form>
+
         </div>
         <div className="max-w-md mx-auto px-8 py-12 mt-20 overflow-hidden">
           <div id="entriesContainer" style={{ paddingTop: '100px' }}>
