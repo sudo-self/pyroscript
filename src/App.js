@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
@@ -43,7 +44,7 @@ const App = () => {
       const messagesData = snapshot.val();
       const messagesArray = [];
       for (let key in messagesData) {
-        messagesArray.unshift(messagesData[key]);
+        messagesArray.unshift({ ...messagesData[key], id: key });
       }
       setMessages(messagesArray);
     });
@@ -98,7 +99,8 @@ const App = () => {
       timestamp: new Date(timestamp).toLocaleString(),
       username,
       avatarUrl,
-      imageUrl
+      imageUrl,
+      likes: 0 // Initialize likes count to 0
     }, (error) => {
       if (error) {
         console.error('Error writing message to Firebase:', error);
@@ -141,6 +143,25 @@ const App = () => {
       await firebase.auth().signOut();
     } catch (error) {
       console.error('Error signing out:', error);
+    }
+  };
+
+  const likeMessage = (messageId) => {
+    if (user) {
+      const messageRef = firebase.database().ref(`messages/${messageId}`);
+      messageRef.transaction((message) => {
+        if (message) {
+          if (!message.likes) {
+            message.likes = 1;
+          } else {
+            message.likes += 1;
+          }
+        }
+        return message;
+      });
+      confetti();
+    } else {
+      alert('Please sign in to like messages!');
     }
   };
 
@@ -225,16 +246,17 @@ const App = () => {
         <div className={`max-w-md mx-auto px-8 py-12 mt-20 overflow-hidden ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-300'}`}>
           <div id="entriesContainer" style={{ paddingTop: '100px', width: '100%' }}>
             <div className="flex items-center justify-center">
-              <img src="https://pub-c1de1cb456e74d6bbbee111ba9e6c757.r2.dev/fire.webp" alt="Jesse's SVG" className="w-4 h-auto" />
-          <span className="items-center text-base font-bold" id="messageCount" style={{ width: '100%', color: darkMode ? 'white' : 'black' }}>{messages.length}</span>
-
-
+              <img src="https://api.iconify.design/teenyicons:firebase-outline.svg" alt="Firebase Logo" className="w-4 h-auto" />
+              <span className="items-center text-base font-bold" id="messageCount" style={{ width: '100%', color: darkMode ? 'white' : 'black' }}>{messages.length}</span>
             </div>
-            {messages.map((message, index) => (
-              <div key={index} className="w-full mb-2">
+            {messages.map((message) => (
+              <div key={message.id} className={`w-full mb-2 ${message.likes ? 'border-red-500' : ''}`}>
                 <div className="flex items-center overflow-hidden">
                   <img src={message.avatarUrl} className="w-8 h-8 mr-2 rounded-full" />
                   <p className="entry-text">{message.message}</p>
+                  <button onClick={() => likeMessage(message.id)} className="ml-auto text-sm text-gray-500 focus:outline-none hover:text-red-500">
+                                        <img src="https://api.iconify.design/teenyicons:firebase-outline.svg?color=%23f23e02" alt="SVG" className="w-4 h-auto" />{message.likes && `(${message.likes})`}
+                  </button>
                 </div>
                 {message.imageUrl && <img src={message.imageUrl} alt="Uploaded" className="w-full mt-2 rounded-md" />}
                 <p className="text-sm text-gray-500">{message.timestamp}</p>
