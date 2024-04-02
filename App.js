@@ -14,7 +14,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 const firebaseConfig = {
   apiKey: "AIzaSyAFRwmutdSXr2XlY_VROUkN0QRna8kbDvc",
   authDomain: "fresh-squeezed-lemons.firebaseapp.com",
-  databaseURL: "https://fresh-squeezed-lemons-default-rtdb.firebaseio.com",
+  databaseURL:
+"https://fresh-squeezed-lemons-default-rtdb.firebaseio.com",
   projectId: "fresh-squeezed-lemons",
   storageBucket: "fresh-squeezed-lemons.appspot.com",
   messagingSenderId: "680668621920",
@@ -26,12 +27,15 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
+const storage = firebase.storage(); 
+
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [image, setImage] = useState(null);
   const [darkMode, setDarkMode] = useState(false);
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
     const messagesRef = firebase.database().ref('messages');
@@ -46,6 +50,9 @@ const App = () => {
 
     const authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
+      setError(null); 
+    }, (error) => {
+      setError(error.message); 
     });
 
     return () => {
@@ -63,7 +70,7 @@ const App = () => {
           setImage(null);
           confetti();
         } else {
-          alert('You must be signed in to post messages!');
+          alert('Thank you for using Pyroscript. You must be signed in to post messages! Any content that violates community standards will be removed.');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
@@ -81,8 +88,7 @@ const App = () => {
     let imageUrl = null;
 
     if (image) {
-      const storageRef = firebase.storage().ref(`images/${timestamp}`);
-      const imageRef = storageRef.child(image.name);
+      const imageRef = storage.ref(`images/${timestamp}_${image.name}`);
       await imageRef.put(image);
       imageUrl = await imageRef.getDownloadURL();
     }
@@ -229,6 +235,7 @@ const App = () => {
                   <img src={message.avatarUrl} className="w-8 h-8 mr-2 rounded-full" />
                   <p className="entry-text">{message.message}</p>
                 </div>
+                {message.imageUrl && <img src={message.imageUrl} alt="Uploaded" className="w-full mt-2 rounded-md" />}
                 <p className="text-sm text-gray-500">{message.timestamp}</p>
               </div>
             ))}
