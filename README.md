@@ -1,192 +1,70 @@
-## A react messenger app with Firebase<br>
-React 0auth Firebase Tailwind Dicebear APi Vercel<br>
-<img id="modeIcon" src="https://bucket.jessejesse.com/fire.webp" alt="Cloudy Icon" class="w-6 h-6 mr-2"><br>
-### vercel app: [chat](https://pyroscript.vercel.app/)
-### Firebase app: [chat](https://fresh-squeezed-lemons.web.app)
+# Getting Started with Create React App
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Available Scripts
 
-### Random Seed
+In the project directory, you can run:
 
-```
-      
-        function generateRandomSeed() {
-            const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let seed = '';
-            for (let i = 0; i < 10; i++) {
-                seed += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return seed;
-        }
+### `npm start`
 
-```
-### confetti (confetti-btn)
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```s
-     
-        var count = 500;
-        var defaults = {
-            origin: {
-                y: 0.7
-            }
-        };
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-    function fire(particleRatio, opts) {
-            confetti(Object.assign({}, defaults, opts, {
-                particleCount: Math.floor(count * particleRatio),
-                colors: ['#D97706']
-            }));
-        }
+### `npm test`
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var button = document.querySelector('.confetti-btn');
-            button.addEventListener('click', function() {
-                fire(0.25, {
-                    spread: 26,
-                    startVelocity: 55,
-                });
-                fire(0.2, {
-                    spread: 60,
-                });
-                fire(0.35, {
-                    spread: 100,
-                    decay: 0.91,
-                    scalar: 0.8
-                });
-                fire(0.1, {
-                    spread: 120,
-                    startVelocity: 25,
-                    decay: 0.92,
-                    scalar: 1.2
-                });
-                fire(0.1, {
-                    spread: 120,
-                    startVelocity: 45,
-                });
-            });
-        });
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### wrangler.toml
+### `npm run build`
 
-```
-name = "chat"
-main = "src/index.js"
-compatibility_date = "2022-05-06"
-site = { bucket = "./public" }
-```
-### Package.json
-```
-{
-  "name": "chat",
-  "version": "0.0.0",
-  "devDependencies": {
-    "@cloudflare/kv-asset-handler": "^0.2.0",
-    "wrangler": "0.0.30"
-  },
-  "private": true,
-  "scripts": {
-    "start": "wrangler dev",
-    "publish": "wrangler publish"
-  }
-}
-```
-### fetch entries on scroll
- 
- ```
-        window.addEventListener('scroll', () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-                fetchEntries();
-            }
-        });
- ```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### static.yml
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```
-name: Deploy static content to Pages
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-on:
- 
-  push:
-    branches: ["main"]
+### `npm run eject`
 
- 
-  workflow_dispatch:
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
+## Learn More
 
-### message count
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-```
- db.ref("messages").on("value", (snapshot) => {
-            const messageCount = snapshot.numChildren();
-            document.getElementById("messageCount").textContent = `${messageCount}`;
-        });
-```
-### SDK
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+### Code Splitting
 
-[FIREBASE CONFIG HERE]
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+### Analyzing the Bundle Size
 
-```
-### database.rules for auth
-```
-{
-  "rules": {
-    ".read": true,
-    ".write": "auth != null"
-  }
-}
-```
-### firebase.json
-```
-{
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "hosting": {
-    "public": "build",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  }
-}
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
